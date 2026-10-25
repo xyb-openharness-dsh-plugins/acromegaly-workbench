@@ -1,0 +1,58 @@
+{
+  "name": "@xyb-community/acromegaly-workbench",
+  "version": "0.1.0",
+  "description": "面向肢端肥大症患者与照护者的本机病程资料工作台：GH/IGF-1 生化时间线、垂体手术后激素替代双主体档案、生长抑素类似物等药物注射周期、合并症（糖代谢/心血管/睡眠呼吸暂停/关节）分节轨道",
+  "private": true,
+  "type": "module",
+  "main": "./dsh/index.js",
+  "exports": {
+    ".": "./dsh/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "dsh",
+    "lib",
+    "assets",
+    "cordis.patch.yml",
+    "README.md",
+    "NOTICE.md"
+  ],
+  "scripts": {
+    "check": "node --check dsh/index.js && node --check lib/client.js && node scripts/check-workbench-package.mjs . && node scripts/check-host-contract.mjs",
+    "check:host": "node scripts/check-host-contract.mjs",
+    "test": "node --test test/*.test.mjs",
+    "audit": "node scripts/check-conformance.mjs .",
+    "release:check": "npm run check && npm run test && npm run audit",
+    "pack:check": "npm pack --dry-run",
+    "probe:artifact": "node scripts/serve-artifact.mjs",
+    "probe:tabs": "python3 scripts/verify-tabs-on-artifact.py",
+    "probe:page-view": "node scripts/probe-page-view.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "dsh-desktop-workbenches"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xyb-openharness-dsh-plugins/acromegaly-workbench"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.1 <5",
+    "@deepseek-ai/dsh-client-connection": ">=0.1.0-rc.0 <0.3.0-0",
+    "@deepseek-ai/dsh-host-webserver": ">=0.1.0-rc.0 <0.3.0-0",
+    "@deepseek-ai/schemastery": ">=3.18.1 <4"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "UNLICENSED"
+}

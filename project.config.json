@@ -1,0 +1,18 @@
+{
+  "packageName": "@xyb-community/acromegaly-workbench",
+  "title": "小肢宝 LimbPal · 肢端肥大症患者工作台",
+  "repository": "https://github.com/xyb-openharness-dsh-plugins/acromegaly-workbench",
+  "description": "面向肢端肥大症患者与照护者的本机病程资料工作台：GH/IGF-1 生化时间线、垂体手术后激素替代双主体档案、生长抑素类似物等药物注射周期、合并症（糖代谢/心血管/睡眠呼吸暂停/关节）分节轨道",
+  "slug": "acromegaly-workbench",
+  "layoutMode": "business-first",
+  "businessWidth": 0.65,
+  "targetUsers": "肢端肥大症患者本人与家属照护者双主体；覆盖确诊起全病程（手术/药物/放疗后生化监测、激素替代、合并症管理、终生随访）；支持家属代记与私密内容分级",
+  "scenario": "患者与照护者整理垂体 MRI 与病理报告、GH/IGF-1 周期化验、生长抑素类似物注射与剂量记录、垂体功能减退替代用药、合并症化验与检查材料，追踪生化时间线与随访节奏，准备复诊问题并回顾医生确认后的记录",
+  "coreFlow": [
+    "选择本地资料目录并导入或登记化验（GH/IGF-1/糖代谢）、垂体 MRI、用药注射与合并症材料",
+    "核对生化时间线（引用不判定）、药物周期折叠卡、激素替代档案与合并症分节记录",
+    "查看长程随访日历与趋势，标记症状与待办，生成复诊摘要与问题清单",
+    "家属以代记身份记录随访与照护线索，私密内容分级管理，并把明确任务交给 Desktop 原生 Agent 会话"
+  ],
+  "completion": "患者与照护者确认的资料和生化时间线、可追溯的 GH/IGF-1 趋势、注射周期与合并症记录、复诊摘要均保存在明确选择的本机资料目录中；私密内容按 visibility 分级且三处出口过滤"
+}
