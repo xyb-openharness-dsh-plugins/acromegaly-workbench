@@ -26,3 +26,7 @@
 - prototypes/v0.2/app.js（唯一源，public 同步再生成）：嵌入式形态点击协议链接 → `postMessage(acromegaly:agent-draft, send:true)` 直接发送；file:// 独立形态进演示面板。
 - IP8/IP9 修订：仍不代替患者发言、AI 回复是候选（核对采纳、拒收零副作用）——变化仅是"预写提示词+上下文从待发送变为直接发送"。
 - 版本簿记：VERSION/package.json/lib/version.js/public ver-chip 四处 0.2.1 同源。
+
+## 0.2.2 — 2026-10-25
+
+- 接入脚手架 34 号「AI 协助一键发送契约」：新增 scripts/check-agent-draft-bridge.mjs 对穿断言器（页面 postMessage ↔ 壳层监听 ↔ 双守卫提交），进 npm run check 链（实测 ✓）。契约本体见 starter docs/34-AGENT-DRAFT-SEND.md。
