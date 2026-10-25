@@ -11,3 +11,6 @@ output/
 *.sqlite-wal
 *.sqlite-shm
 *.db
+
+# 密钥与凭据
+.secrets/
