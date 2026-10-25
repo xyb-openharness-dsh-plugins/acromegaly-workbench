@@ -30,3 +30,7 @@
 ## 0.2.2 — 2026-10-25
 
 - 接入脚手架 34 号「AI 协助一键发送契约」：新增 scripts/check-agent-draft-bridge.mjs 对穿断言器（页面 postMessage ↔ 壳层监听 ↔ 双守卫提交），进 npm run check 链（实测 ✓）。契约本体见 starter docs/34-AGENT-DRAFT-SEND.md。
+
+## 0.2.3 — 2026-10-25
+
+- 修复 0.2.2 打包时 lib/client.js 与 src/client.js 不同步（check "--check" 模式未拦住的旧产物）；重建后 check 全绿。断言器与契约无行为变化。
