@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>小肢宝 LimbPal · 肢端肥大症患者工作台原型 v0.2.0</title>
+<meta name="description" content="肢端肥大症（ACM）患者与照护者工作台交互原型。演示数据，全部为模拟资料；只整理不判定。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="prototype-bar"><span><b>交互原型 v0.2.0</b> · 全部为模拟资料</span><span>仅本页演示 · 刷新重置 · 未接入 DSH / AI</span></div>
+<div class="workspace">
+  <aside class="sidebar" aria-label="小肢宝业务导航">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="12" fill="#EDEAF2"/><path d="M24 11c-4.6 3.8-7 7-7 10.2a7 7 0 0 0 14 0C31 18 28.6 14.8 24 11Z" fill="#5C4B7A"/><path d="M15 31c2.2 3.4 5.4 5.2 9 5.2s6.8-1.8 9-5.2c-3.2-2.2-7.4-1.6-9 .6-1.6-2.2-5.8-2.8-9-.6Z" fill="#84719F"/><circle cx="35.5" cy="13.5" r="2.6" fill="#D97B29"/><circle cx="12" cy="35" r="1.7" fill="#B0A6C4"/></svg>
+    </span><div><strong>小肢宝</strong><span>LimbPal · acromegaly</span></div></div>
+    <button class="profile profile-btn" id="profile-btn" data-action="settings" data-tab="actor" aria-label="查看资料与记录主体，打开设置">
+      <div class="avatar" id="profile-avatar" aria-hidden="true">罗</div>
+      <div><b id="profile-name">罗建国的资料</b><span id="profile-meta">48 岁 · 肢端肥大症 术后 1 年半</span></div>
+      <span class="profile-caret" aria-hidden="true">⌄</span>
+    </button>
+    <nav id="nav" aria-label="一级导航（10 线，key 与 INTERACTION-DESIGN §五一致）"></nav>
+    <div class="sidebar-bottom"><span class="eyebrow">小 X 宝家族</span><p>一步一记录，<br>随访一辈子有据可查。</p><button class="text-button" data-action="help">原型操作说明 ↗</button></div>
+  </aside>
+  <div class="stage">
+    <div class="work-area">
+      <header class="topbar">
+        <div class="breadcrumb"><button class="crumb-home" data-action="go" data-page="dashboard" title="回到看板">小肢宝</button> <span>/</span> <b id="breadcrumb">看板</b></div>
+        <div class="top-actions">
+          <button class="status" id="ready-store" data-action="settings" aria-label="资料目录：已就绪"><i></i><span>资料目录</span><b>已就绪</b></button>
+          <button data-action="settings" aria-label="打开设置：本机数据目录、记录主体、私密分级">设置</button>
+          <button id="font-toggle" aria-pressed="false" title="切换大字">大字 Aa</button>
+          <button id="agent-toggle" data-action="agent-toggle" aria-expanded="false" aria-controls="agent-pane">AI 协助</button>
+          <button class="ver-chip" id="ver-chip" data-action="about" aria-label="关于小肢宝：版本与构建信息">v0.2.0</button>
+        </div>
+      </header>
+      <main id="main" tabindex="-1"></main>
+      <footer class="footer">小肢宝 LimbPal · 与肢端肥大症患者和照护者一起整理、记录、准备沟通 · 只整理不判定，判读归内分泌及各专科团队 <span class="ver-line"><b id="app-version">v0.2.0</b><em>2026-10-25</em></span></footer>
+    </div>
+    <div id="agent-splitter" role="separator" aria-orientation="vertical" aria-label="调整 AI 协助面板宽度（左右方向键步进）" aria-valuemin="25" aria-valuemax="45" aria-valuenow="35" tabindex="0" hidden></div>
+    <aside id="agent-pane" aria-label="AI 协助面板" hidden>
+      <div class="agent-head">
+        <span id="agent-label" class="agent-label">AI 协助 · 演示</span>
+        <button id="agent-hide" class="icon-button" data-action="agent-hide" aria-label="收起 AI 协助">×</button>
+      </div>
+      <div class="agent-body">
+        <div class="notice plain">这是<b>演示面板</b>：点任意「AI 协助」链接（acromegaly:agent-draft 协议）把预写提示词填到这里；原型不发送任何内容。</div>
+        <p class="small-note">提示词只携带本机已核对摘要（private 过滤）；候选逐项核对才入事实层；AI 不代替你发言、不生成任何判读。</p>
+      </div>
+      <div class="agent-foot"><input placeholder="演示：未接入，输入不可用" disabled aria-label="演示输入框，未接入"></div>
+    </aside>
+  </div>
+</div>
+<dialog id="dialog" aria-labelledby="dialog-title">
+  <div class="dialog-head"><div><span class="eyebrow" id="dialog-eyebrow">小肢宝</span><h2 id="dialog-title"></h2></div><button class="icon-button" data-action="close" aria-label="关闭弹窗">×</button></div>
+  <div id="dialog-body" class="dialog-body"></div>
+  <div id="dialog-foot" class="dialog-foot"></div>
+</dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="demo-data.js"></script>
+<script src="app.js"></script>
+</body></html>
