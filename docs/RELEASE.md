@@ -23,3 +23,14 @@ README/许可证/素材来源/运行依赖/更新说明：...
 回滚步骤/数据兼容检查/已知限制：...
 
 工作台市场发布另按 docs/10-MARKET-PUBLISHING.md 执行，附 templates/MARKET-ACCEPTANCE.md 的指定版本手工确认。官方指南复核日期/来源：... 最终安装来源：... 用户确认的项目与执行者：... PR URL/最新提交检查实际执行结果：... 市场目录可见与可安装证据：...。未授权投稿时标不适用，不把 Git push 当市场发布。
+
+## 0.2.0 装机记录（M6 · 2026-10-25）
+
+| 项 | 值 |
+| --- | --- |
+| tgz | `release/xyb-community-acromegaly-workbench-0.2.0.tgz`（sha256 abd5ddcb…515fc18） |
+| 四要素对照（tgz 内容实测） | H1 dsh 块（bundle.patch+client.inject）✅ / H2 cordis.patch.yml config.root（注释放条目后）✅ / H3 真客户端 `接入骨架`占位=0、__ModuleLoader__=2 ✅ / H4 版本同源 0.2.0（tgz 文件名=lib/version.js=public ver-chip）✅ |
+| 安装 | `NODE_OPTIONS= corepack pnpm add -w --save-exact file:…0.2.0.tgz`（+1 包，Done in 1m4s） |
+| 装机副本核验 | lib/version.js=0.2.0；client 占位=0；dsh/ 11 件齐 ✅ |
+| bundles 登记 | `dsh.profile.bundles` 追加 `@xyb-community/acromegaly-workbench`（35 项）✅ |
+| **UI 加载/业务验证（V2/V3）** | **未验证**——待用户重启 Desktop → 添加小肢宝 LimbPal → **先新建会话**（宿主按会话授权）→ 核心流程走查（记一次化验/注射折叠卡/复诊摘要/private 过滤）→ 真机截图刷新 README |
