@@ -16,3 +16,13 @@
 - 客户端：src/client.js → scripts/build-client.mjs → lib/client.js（customFrame 自绘顶栏 + iframe 业务区 + AI 会话 25%–45%）；public/ 四件套由 scripts/build-public.mjs 从原型产出（style/demo-data 逐字符一致，index/app 仅版本串与数据层补丁：先连 /api/acromegaly/bootstrap，拿不到回退演示并横幅提醒）。
 - 测试六套（store / demo-parity / server / client / import-export / pack-contents）45 用例全过；scripts/check-wording.mjs 判定词表（生化控制/结果正常异常/建议调整剂量/可以停药/该复查了等）零命中。
 - 宿主接线：cordis.patch.yml 的 config.root 由 dsh/index.js 实际读取；package.json 0.2.0 + files 增补 public/demo/schema；VERSION=0.2.0。
+
+## 0.2.1 — 2026-10-25
+
+用户授权变更（2026-10-25 原话："AI协助：改为把内容发到AI对话窗口去，开启AI互动"）：AI 协助按钮从"只填草稿"改为**直接发送到 AI 对话窗口、开启互动**。
+
+- 修复连带缺陷：0.2.0 的 public/app.js 从未向壳层 postMessage——开发版 AI 按钮实际连不到原生会话（V3 走查本会暴露）。
+- src/client.js：fillDraft 支持自动发送（仅 plain 相、草稿非空时 `input.submit()`；失败则草稿保留待手动回车）；pendingDraft 队列携带 send 标志，composer 未就绪时暂存、就绪后自动发送。
+- prototypes/v0.2/app.js（唯一源，public 同步再生成）：嵌入式形态点击协议链接 → `postMessage(acromegaly:agent-draft, send:true)` 直接发送；file:// 独立形态进演示面板。
+- IP8/IP9 修订：仍不代替患者发言、AI 回复是候选（核对采纳、拒收零副作用）——变化仅是"预写提示词+上下文从待发送变为直接发送"。
+- 版本簿记：VERSION/package.json/lib/version.js/public ver-chip 四处 0.2.1 同源。

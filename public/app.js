@@ -13,7 +13,7 @@
    T5 合并症 4 节分类数据不进生化趋势；
    T6 随访日历只登记医嘱原文与日期，不推算"该查了"；
    T7 recorder 标识本人/家属代记；visibility 三出口（看板/导出/一图秀）统一过滤 private。
-   AI 协助入口为 acromegaly:agent-draft 协议链接（携带预写提示词+当前病情上下文）；只填不发，不代替患者发言。 */
+   AI 协助入口为 acromegaly:agent-draft 协议链接（携带预写提示词+当前病情上下文）；0.2.1 起（用户授权）：嵌入式形态直接发送到 AI 对话开启互动，回复仍是候选，核对才入事实层。 */
 
 const APP_INFO = {
   version: '0.2.0', build: '2026-10-25',
@@ -188,7 +188,7 @@ const section = (title, desc = '', action = '') => `<div class="section-title"><
 const backRow = () => state.page === 'dashboard' ? '' : `<div class="back-row"><button class="text-button" data-action="go" data-page="dashboard">← 回到看板</button></div>`;
 const head = (title, desc, action = '') => `<div class="page-head"><div><span class="eyebrow">LIMBPAL / ACROMEGALY WORKBENCH</span><h1>${title}</h1><p>${desc}</p></div><div class="actions">${action}</div></div>`;
 
-/* ---------------- AI 协助（acromegaly:agent-draft 协议链接；只填不发） ---------------- */
+/* ---------------- AI 协助（acromegaly:agent-draft 协议链接；0.2.1：嵌入式直接发送） ---------------- */
 /* 每个视图的预写提示词 + 当前病情上下文（当前视图 key + 相关数据摘要） */
 function aiPromptFor(viewKey) {
   const p = profile();
@@ -220,9 +220,10 @@ function aiPromptFor(viewKey) {
   ctx.push('以上来自本机记录（演示数据）；你只做整理候选，逐项给我核对，判断由我和治疗团队做。');
   return `${base}\n\n${ctx.join('\n')}`;
 }
-/* 协议链接：href="acromegaly:agent-draft?prompt=..."（点击拦截：填入 AI 面板，不自动发送、不代替发言） */
+/* 协议链接：href="acromegaly:agent-draft?prompt=..."（点击拦截：嵌入式形态 postMessage 给壳层直接发送；
+   独立打开的原型形态进演示面板。发送的是预写提示词+上下文，不代替患者发言。） */
 const aiLink = (label = 'AI 协助', viewKey = state.page) =>
-  `<a class="button soft ai-link" href="acromegaly:agent-draft?prompt=${encodeURIComponent(aiPromptFor(viewKey))}" data-ai-view="${viewKey}" title="把预写提示词与当前病情上下文带给 AI（待你核对发送）">${esc(label)} ↗</a>`;
+  `<a class="button soft ai-link" href="acromegaly:agent-draft?prompt=${encodeURIComponent(aiPromptFor(viewKey))}" data-ai-view="${viewKey}" title="把预写提示词与当前病情上下文发给 AI，开启互动（回复是候选，核对后采纳）">${esc(label)} ↗</a>`;
 
 const subnav = () => {
   const items = SUBPAGES[state.page]; if (!items) return '';
@@ -700,9 +701,9 @@ function renderAgent() {
   if (!a.open) return;
   const body = $('.agent-body');
   const promptBox = a.prompt
-    ? `<div class="agent-msg user"><b>草稿（待你发送 · 不会自动发出）</b><p>${esc(a.prompt)}</p></div>
-       <div class="agent-msg bot"><b>演示回复（未接通）</b><p>真实版本会基于已核对记录生成候选；本原型不生成内容、不代替你发言。</p></div>`
-    : `<div class="notice plain">这是<b>演示面板</b>：原型未接入真实 AI。点任意「AI 协助」协议链接（acromegaly:agent-draft）会把预写提示词 + 当前病情上下文填到这里，等你核对发送。</div>`;
+    ? `<div class="agent-msg user"><b>已发送给 AI</b><p>${esc(a.prompt)}</p></div>
+       <div class="agent-msg bot"><b>演示回复（未接通）</b><p>嵌入式形态里这条会直接发进 AI 对话、可继续互动；AI 回复是候选，核对后采纳，拒收零副作用。</p></div>`
+    : `<div class="notice plain">这是<b>演示面板</b>：原型未接入真实 AI。点任意「AI 协助」协议链接（acromegaly:agent-draft）会把预写提示词 + 当前病情上下文发给 AI；嵌入式形态直接进 AI 对话开启互动。</div>`;
   body.innerHTML = promptBox + `<p class="small-note">private 记录默认不进入 AI 上下文（三出口统一过滤）；候选需逐项核对才入事实层，拒收零副作用。</p>`;
 }
 function setAgent(open) { state.agent.open = open; renderAgent(); }
@@ -885,7 +886,7 @@ const ACTIONS = {
   },
   help() {
     openModal('原型操作说明', `<p class="small-note">左侧导航 10 条一级线（共 ${Object.keys(SUBPAGES).reduce((n, k) => n + SUBPAGES[k].length, 0)} 个二级页签）；看板入口文案与导航 key 与 docs/INTERACTION-DESIGN.md 逐字一致。</p>
-      <p class="small-note">「AI 协助」是 acromegaly:agent-draft 协议链接：点击把预写提示词 + 当前病情上下文填入右侧面板，待你核对发送；不自动发送、不代替发言。</p>
+      <p class="small-note">「AI 协助」是 acromegaly:agent-draft 协议链接：点击把预写提示词 + 当前病情上下文发给 AI 开启互动（0.2.1 起直接发送，用户授权）；AI 回复是候选，核对采纳、拒收零副作用，不代替你发言。</p>
       <p class="small-note">手工通道收在「⋯ 更多」（每表单 ≤6 字段）；更正 = 新增版本。右侧 AI 面板可拖宽 25–45%、可收起。</p>`,
       '<button data-action="close">关闭</button>', '帮助');
   },
@@ -1040,7 +1041,8 @@ const SAVE = {
 
 /* ---------------- 事件 ---------------- */
 document.addEventListener('click', (e) => {
-  /* AI 协助协议链接：acromegaly:agent-draft —— 拦截导航，只填不发（IP8/IP9：示例按钮只填不发） */
+  /* AI 协助协议链接：acromegaly:agent-draft —— 拦截导航（IP8/IP9 修订版·0.2.1 用户授权：一键发送开启互动）。
+     嵌入式（壳层 iframe）→ postMessage 给壳层直接发送；独立打开（file://）→ 演示面板。 */
   const link = e.target.closest('a[href^="acromegaly:agent-draft"]');
   if (link) {
     e.preventDefault();
@@ -1049,7 +1051,12 @@ document.addEventListener('click', (e) => {
       const prompt = u.searchParams.get('prompt') || '';
       state.agent.prompt = prompt;
       setAgent(true);
-      toast('已填入提示词与当前病情上下文（待你发送，不会自动发出）');
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'acromegaly:agent-draft', prompt, send: true }, location.origin);
+        toast('已发送到 AI 对话，可继续互动');
+      } else {
+        toast('演示面板：嵌入式形态会直接发送到 AI 对话');
+      }
     } catch { toast('协议链接解析失败（演示）'); }
     return;
   }
