@@ -1,0 +1,49 @@
+{
+  "topic": "acromegaly",
+  "year": "2026",
+  "snapshotDate": "2026-10-25",
+  "tool": "unified-trial-mcp @ /Users/qinxiaoqiang/Downloads/unified_search_trials/dist/src/cli/main.js",
+  "queries": [
+    {
+      "keyword": "肢端肥大症",
+      "note": "中文标准名（罕见病 #3）"
+    },
+    {
+      "keyword": "生长激素分泌型垂体腺瘤",
+      "note": "病理机制名"
+    },
+    {
+      "keyword": "垂体腺瘤",
+      "note": "中文宽口径"
+    },
+    {
+      "keyword": "acromegaly",
+      "note": "英文标准名"
+    },
+    {
+      "keyword": "growth hormone excess",
+      "note": "英文机制名"
+    },
+    {
+      "keyword": "somatotroph adenoma",
+      "note": "英文正式名"
+    }
+  ],
+  "perSourceLimit": 200,
+  "recordCount": 10,
+  "dbCount": 10,
+  "sourceStatusRows": 36,
+  "honesty": {
+    "offlineCorpora": "ChiCTR/CDE/CTV 离线语料仅胰腺癌覆盖；ACM 只依赖在线通道终态，见 source_statuses 表",
+    "statusWording": "登记 ≠ 有效 ≠ 安全 ≠ 可入组；状态一律\"登记状态，未核实\"",
+    "mergeRule": "仅同一登记号（NCT/ChiCTR/CDE 等）合并，其余并排保留来源"
+  },
+  "files": {
+    "trials-2026.jsonl": {
+      "sha256": "75cf1233de91eb516da451cab6812a438b00451ef136710f1d2aaeb206f6eb83"
+    },
+    "acromegaly_trials_2026.sqlite": {
+      "sha256": "41ebeba6b245e94e24c55a35fecb53c91f91f5eac4374ae0824624c383d526f6"
+    }
+  }
+}
