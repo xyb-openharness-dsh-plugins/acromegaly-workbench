@@ -32,6 +32,7 @@
     "probe:artifact": "node scripts/serve-artifact.mjs",
     "probe:tabs": "python3 scripts/verify-tabs-on-artifact.py",
     "probe:page-view": "node scripts/probe-page-view.mjs",
+    "probe:primer": "node scripts/probe-disease-primer.mjs",
     "build:demo": "node --disable-warning=ExperimentalWarning demo/build-demo-data.mjs",
     "build:version": "node scripts/build-version.mjs",
     "build:client": "node scripts/build-client.mjs",
