@@ -789,7 +789,7 @@ function openComoForm(section) {
   openModal(`手工记一条合并症记录（5 字段 · ${section}）`, `<div class="form-grid">
     <div><label class="form-label" for="f-d">日期</label><input id="f-d" type="date" value="${TODAY}"></div>
     <div><label class="form-label" for="f-i">项目</label><input id="f-i" placeholder="如 HbA1c / 血压"></div>
-    <div><label class="form-label" for="f-v">数值</label><input id="f-v" placeholder="照报告抄"></div>
+    <div><label class="form-label" for="f-v">数值（键盘输入）</label><input id="f-v" inputmode="decimal" placeholder="照报告抄"></div>
     <div><label class="form-label" for="f-q">报告原句</label><input id="f-q" placeholder="照抄"></div>
     <div><label class="form-label" for="f-s">分节</label><select id="f-s">${['glucose', 'cardio', 'sleep', 'bone'].map((k) => `<option value="${k}" ${k === section ? 'selected' : ''}>${{ glucose: '糖代谢', cardio: '心血管', sleep: '睡眠呼吸暂停', bone: '骨关节' }[k]}</option>`).join('')}</select></div>
   </div><p class="small-note">合并症分类数据不进生化趋势（T5）。</p>`,
