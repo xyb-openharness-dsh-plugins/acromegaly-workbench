@@ -1,3 +1,6 @@
 - insert:
     - id: acromegaly-workbench-main
       name: "@xyb-community/acromegaly-workbench"
+      # config.root 指向 Desktop 工作台宿主目录（dshHomePath 由宿主解析）
+      config:
+        root: !!js dshHomePath('acromegaly-workbench')
