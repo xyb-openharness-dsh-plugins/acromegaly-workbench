@@ -60,3 +60,4 @@
 - 坑3（项目）：schema 冻结后 parse_job 无处落——document 多行留痕，0002 迁移补表（来源：M5 未尽项 1）。
 - 回流：坑1 升格 starter LESSONS（dialog 截图+md5 去重断言）；词表扩充与多单位不换算已入 starter LESSONS。
 - 本轮"下一轮直接受益"回流：截图 md5 去重断言（可断言级，列入检查器待实施清单）。
+- **M7 发布口径（用户 2026-10-25）**：GitHub tag/Release 照常；awesome-dsh-workbench 市场投稿确认跳过。

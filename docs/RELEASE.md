@@ -34,3 +34,9 @@ README/许可证/素材来源/运行依赖/更新说明：...
 | 装机副本核验 | lib/version.js=0.2.0；client 占位=0；dsh/ 11 件齐 ✅ |
 | bundles 登记 | `dsh.profile.bundles` 追加 `@xyb-community/acromegaly-workbench`（35 项）✅ |
 | **UI 加载/业务验证（V2/V3）** | **未验证**——待用户重启 Desktop → 添加小肢宝 LimbPal → **先新建会话**（宿主按会话授权）→ 核心流程走查（记一次化验/注射折叠卡/复诊摘要/private 过滤）→ 真机截图刷新 README |
+
+## 发布口径（2026-10-25 用户确认）
+
+- **GitHub 发布可以**：tag + Release（附 tgz + sha256）照常执行。
+- **工作台市场/awesome-dsh-workbench 目录投稿不需要**：docs/10-MARKET-PUBLISHING.md 流程对本仓不适用，标注"用户确认跳过"，不投目录、不做市场验收。
+- 已发：v0.2.0 / v0.2.1 / v0.2.2 / v0.2.3 / v0.2.4（tgz+sha256 随 Release）。
