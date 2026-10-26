@@ -1,6 +1,6 @@
 {
   "name": "@xyb-community/acromegaly-workbench",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "面向肢端肥大症患者与照护者的本机病程资料工作台：GH/IGF-1 生化时间线、垂体手术后激素替代双主体档案、生长抑素类似物等药物注射周期、合并症（糖代谢/心血管/睡眠呼吸暂停/关节）分节轨道",
   "private": true,
   "type": "module",

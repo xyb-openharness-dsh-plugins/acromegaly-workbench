@@ -34,3 +34,9 @@
 ## 0.2.3 — 2026-10-25
 
 - 修复 0.2.2 打包时 lib/client.js 与 src/client.js 不同步（check "--check" 模式未拦住的旧产物）；重建后 check 全绿。断言器与契约无行为变化。
+
+## 0.2.4 — 2026-10-25
+
+用户真机反馈（截图）：右侧"AI 协助·演示"面板是原型演示残留，嵌入式形态不需要。
+- 修订 34 号：**演示面板只存在于独立打开（file://）形态**；嵌入式（壳层 iframe）下业务页自有 AI 面板（toggle/splitter/pane）整体隐藏，原生会话是唯一 AI 面板，AI 按钮直接 postMessage 发送（0.2.1 行为不变）。
+- prototypes/v0.2/app.js：EMBEDDED 探测 + renderAgent 早退 + agent-toggle 守卫；public 四件套同步再生成。

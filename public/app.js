@@ -688,12 +688,17 @@ function render() {
   renderAgent();
 }
 
-/* ---------------- AI 面板（30 号窄宽规则：右侧面板 25–45% 可拖拽可收起） ---------------- */
+/* ---------------- AI 面板（30 号窄宽规则：右侧面板 25–45% 可拖拽可收起） ----------------
+   0.2.4（34 号修订）：演示面板只存在于独立打开（file://）形态。嵌入式（壳层 iframe）下
+   原生会话就是唯一 AI 面板——业务页自有演示面板整体隐藏，AI 按钮直接 postMessage 发送。 */
+const EMBEDDED = (() => { try { return window.parent && window.parent !== window } catch { return false } })();
 function clampAgentW(w) { return Math.min(45, Math.max(25, w)); }
 function renderAgent() {
+  if (EMBEDDED) { $('#agent-splitter').hidden = true; $('#agent-pane').hidden = true; return; }
   const a = state.agent;
   $('#agent-splitter').hidden = !a.open;
   $('#agent-pane').hidden = !a.open;
+  $('#agent-toggle').hidden = EMBEDDED;
   $('#agent-toggle').setAttribute('aria-expanded', String(a.open));
   $('#agent-toggle').textContent = a.open ? '收起 AI' : 'AI 协助';
   document.documentElement.style.setProperty('--agent-w', a.w + '%');
@@ -1063,6 +1068,7 @@ document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-action]');
   if (!el) return;
   const a = el.dataset.action;
+  if (a === 'agent-toggle' && EMBEDDED) return; /* 嵌入式：原生会话面板由壳层开合（34 号） */
   if (a === 'cfg-tab') {
     $$('.cfg-tabs [role=tab]').forEach((b) => b.setAttribute('aria-selected', String(b === el)));
     $$('.cfg-block[data-tab]').forEach((b) => { b.hidden = b.dataset.tab !== el.dataset.tab; });
