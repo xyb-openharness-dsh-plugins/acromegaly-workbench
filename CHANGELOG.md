@@ -10,7 +10,7 @@
 - 指南原件可点（§2.5）：evidence 表 3 行「原件」列由纯文字改为 `{text, url}`；4 段共 9 处 `sources` 补齐 `secondaryUrl`。3 个链接均用真浏览器逐条验活：gov.cn 官方发布页、医脉通指南页、DOI 题录页（12/12 断言通过）。未取得原件的行照实写 note，未编 URL。
 - 看板状态卡（§2.6）：首卡补齐四件——卡头「D+586 状态卡 · 距下次注射 10 天」（锚点 2025-03-18 经蝶手术，天数由锚点日派生、不手填）、大字「第 586 天」、现状行（阶段原文 + 状态 + 下次 2026-11-04 SSA 长效针）、出口按钮排（主按钮进「治疗与注射」；副按钮「疾病概要：肢端肥大症是什么？」打开浮窗）。无锚点时显示「待初始化」并指向设置。
 - 验收：`probe-disease-primer` 9/9 PASS；`check-primer-links` 12/12；`npm run check` 退出码 0（45/45 用例）。链检查器已进 check 链末尾。
-- 已知未完成：`public/` 四件套构建不复制 primer 三件套（public/index.html 引用 primer.css/primer-data.js/primer.js，但三文件不在 public/，开发版会 404）；本次按协议范围未改构建脚本，留待单独修复。
+- 构建修复：`scripts/build-public.mjs` 产出清单纳入 `primer.css` / `primer-data.js` / `primer.js`（与 `public/index.html` 相对引用同名，`--check` 一并校验）。重构建后 `public/` 七文件齐全，真实开发版服务下三件套均 200，probe 对构建产物 9/9 PASS，顶栏「?」在开发版可打开浮窗。
 
 ## 0.1.0 — 2026-10-25
 
