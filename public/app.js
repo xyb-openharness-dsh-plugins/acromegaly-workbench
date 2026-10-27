@@ -351,6 +351,47 @@ function metricCard(code) {
 }
 
 /* ================= dashboard（看板：入口文案逐字 = INTERACTION-DESIGN §二） ================= */
+/* §2.6 状态卡四件：卡头 eyebrow（D+N 状态卡 · 距…）／大字天数（锚点日派生，不手填）／
+   现状行（阶段原文 + 状态 + 下次日期与事项）／出口按钮排（主按钮进当前阶段核心页 + 副按钮开疾病概要）。
+   锚点取「手术记录」的日期；没有锚点时整卡显示待初始化并指向设置（三步初始化），不编天数。 */
+function statusCard(p) {
+  const anchorRec = (p.reports || []).find((r) => r.kind === '手术记录' && r.d);
+  const anchor = anchorRec ? anchorRec.d : '';
+  const nextD = p.nextInjectionDue || '';
+  const primerBtn = `<button class="soft" data-primer-open aria-haspopup="dialog" aria-controls="disease-primer" aria-expanded="false" aria-label="疾病概要：肢端肥大症是什么？">疾病概要：肢端肥大症是什么？</button>`;
+  if (!anchor) {
+    return `<section class="status-card status-empty" aria-label="病程状态卡">
+      <span class="eyebrow">状态卡 · 待初始化</span>
+      <b class="status-empty-title">待初始化</b>
+      <p>还没有锚点日（如手术日）。完成三步初始化后，这里会按锚点日自动计算天数；天数不由本人手填。</p>
+      <div class="actions status-exits"><button class="soft" data-action="settings">去设置完成初始化</button>${primerBtn}</div>
+    </section>`;
+  }
+  const dayNo = daysBetween(anchor, TODAY);
+  const nextIn = nextD ? daysBetween(TODAY, nextD) : null;
+  const nextItem = 'SSA 长效针 · 28 天周期';
+  return `<section class="status-card" aria-label="病程状态卡">
+    <div class="status-head">
+      <span class="eyebrow">D+${dayNo} 状态卡 · ${nextIn !== null ? '距下次注射 ' + nextIn + ' 天' : '下次安排待登记'}</span>
+      ${pill('进行中 · 按医嘱节奏随访', 'blue')}
+    </div>
+    <div class="status-body">
+      <div class="status-day">
+        <b>第 ${dayNo} 天</b>
+        <small>锚点 ${longDate(anchor)} 经蝶手术 · 由锚点日派生</small>
+      </div>
+      <div class="status-now">
+        <p class="status-phase">${esc(p.stageLine)}</p>
+        <p class="status-next">下次：<b>${nextD ? longDate(nextD) : '待登记'}</b>${nextD ? '（' + esc(nextItem) + '）' : ''}</p>
+      </div>
+    </div>
+    <div class="actions status-exits">
+      <button class="primary" data-action="go" data-page="treatment" data-sub="injection">看治疗与注射（按 28 天周期）→</button>
+      ${primerBtn}
+    </div>
+  </section>`;
+}
+
 function pageDashboard() {
   const p = profile();
   const ghr = seriesAll('GHR'), igf = seriesAll('IGF1'), ogtt = seriesAll('GHOG');
@@ -371,7 +412,8 @@ function pageDashboard() {
     { icon: 'chart', title: '病情一图秀', entry: '给医生看一张图', desc: 'GH 与 IGF-1 放回同一段时间', page: 'oneshow', sub: '', scene: '' }
   ];
   return `${head('看板', SUBTITLES.dashboard, aiLink('AI 协助', 'dashboard'))}
-    <div class="stage-strip"><span class="eyebrow">当前阶段 · 引用医嘱语境</span><b>${esc(p.stageLine)}</b><small>${esc(p.diagnosis)} · ${p.age} 岁 · ${esc(p.shoeNote)} · 演示数据</small></div>
+    ${statusCard(p)}
+    <p class="small-note status-context">${esc(p.diagnosis)} · ${p.age} 岁 · ${esc(p.shoeNote)} · 演示数据</p>
     <div class="task-grid" data-product="看板卡入口（文案逐字 = INTERACTION-DESIGN §二）">
       ${cards.map((c) => `<div class="task-entry-wrap">
         <button class="task-entry" data-action="go" data-page="${c.page}" data-sub="${c.sub}" data-scene="${c.scene}">

@@ -10,7 +10,7 @@ window.DISEASE_PRIMER = {
   brand: '小肢宝 LimbPal',
   name: '肢端肥大症',
   en: 'Acromegaly',
-  updated: '2026-10-25',
+  updated: '2026-10-27',
   sections: [
     {
       id: 'definition',
@@ -25,8 +25,8 @@ window.DISEASE_PRIMER = {
         '以上是病种的公共背景，不是对任何一份档案的判断；分期、分型与是否处于活动期，均由内分泌科按生化与影像判定。'
       ],
       sources: [
-        { org: '国家卫健委', doc: '《86 个罕见病病种诊疗指南（2025 年版）》#3 肢端肥大症', version: '2025 年版（2025-07-10 印发）', original: false, page: '页码待核' },
-        { org: '中国垂体腺瘤协作组', doc: '《中国肢端肥大症诊治共识（2021 版）》，中华医学杂志 2021;101(27):2115-2126', version: '2021 版', original: false, page: '页码待核' }
+        { org: '国家卫健委', doc: '《86 个罕见病病种诊疗指南（2025 年版）》#3 肢端肥大症', version: '2025 年版（2025-07-10 印发）', original: false, secondaryUrl: 'https://www.gov.cn/zhengce/zhengceku/202507/content_7031426.htm', page: '页码待核', note: '官网发布页（附 PDF 附件）；本项目未存档原件' },
+        { org: '中国垂体腺瘤协作组', doc: '《中国肢端肥大症诊治共识（2021 版）》，中华医学杂志 2021;101(27):2115-2126', version: '2021 版', original: false, secondaryUrl: 'https://guide.medlive.cn/guideline/23838', page: '页码待核', note: '医脉通指南页（转录）；期刊全文需机构权限' }
       ]
     },
     {
@@ -37,21 +37,21 @@ window.DISEASE_PRIMER = {
       table: {
         head: ['机构', '文件', '版本 / 年份', '原件', '本台的用途'],
         rows: [
-          ['国家卫健委', '《86 个罕见病病种诊疗指南（2025 年版）》#3 肢端肥大症', '2025 年版（2025-07-10 印发）', '未取得原件', '病种名称与范围参照；不引用具体条文'],
-          ['中国垂体腺瘤协作组（联合中华医学会神经外科学分会）', '《中国肢端肥大症诊治共识（2021 版）》，中华医学杂志 2021;101(27):2115-2126', '2021 版', '未取得原件', '治疗手段类别（手术 / 药物三类 / 放疗 / 随访）的并列引用；条目级页码待核'],
-          ['国际共识（机构未逐一核实）', '2023 年肢端肥大症诊断和缓解标准国际共识', '2023（原文链接未获取，版本未核实）', '未取得原件，据二次来源（中文解读）', '仅登记「存在」；本台暂不引用其条目']
+          ['国家卫健委', '《86 个罕见病病种诊疗指南（2025 年版）》#3 肢端肥大症', '2025 年版（2025-07-10 印发）', { text: '未取得原件，据官方发布页', url: 'https://www.gov.cn/zhengce/zhengceku/202507/content_7031426.htm' }, '病种名称与范围参照；不引用具体条文'],
+          ['中国垂体腺瘤协作组（联合中华医学会神经外科学分会）', '《中国肢端肥大症诊治共识（2021 版）》，中华医学杂志 2021;101(27):2115-2126', '2021 版', { text: '未取得原件，据二次来源（医脉通）', url: 'https://guide.medlive.cn/guideline/23838' }, '治疗手段类别（手术 / 药物三类 / 放疗 / 随访）的并列引用；条目级页码待核'],
+          ['Acromegaly Consensus Group（第 14 届肢端肥大症共识会议）', 'Consensus on criteria for acromegaly diagnosis and remission（2023 年诊断与缓解标准国际共识）', '在线 2023-11-03；Pituitary 2024;27(1):7-22', { text: '未取得原件，据 DOI 题录', url: 'https://doi.org/10.1007/s11102-023-01360-1' }, '仅登记版本与题录；本台暂不引用其条目']
         ]
       },
       points: [
         '指南与共识给的是「通常怎么做」，不是「你该怎么做」。版本号必须写清：同一份文件换一版，条目会变。',
         '本台对未取得原件的文件只记「存在」与「大致讲什么」，不复制诊断阈值、分期标准、剂量方案，页码一律写待核。',
         '本项目检索未发现「中国肢端肥大症诊治共识 2022 版 / 2024 版」存在，已按对 2021 版的误记处理（记录见 research-notes/medical-constraints.md）。',
-        '2023 年国际共识目前只检索到中文解读，原文链接未获取；在拿到原件前，本台不把它写进任何口径。'
+        '2023 年国际共识的题录与 DOI 已核对（在线 2023-11-03，Pituitary 2024;27(1):7-22）；全文需订阅，本台只登记版本与题录，不引用其条目。'
       ],
       sources: [
-        { org: '国家卫健委', doc: '《86 个罕见病病种诊疗指南（2025 年版）》#3', version: '2025 年版', original: false, page: '页码待核' },
-        { org: '中国垂体腺瘤协作组', doc: '《中国肢端肥大症诊治共识（2021 版）》', version: '2021 版', original: false, page: '页码待核' },
-        { org: '国际共识', doc: '2023 年肢端肥大症诊断和缓解标准国际共识（中文解读）', version: '2023（未核实原文）', original: false, page: '页码待核' }
+        { org: '国家卫健委', doc: '《86 个罕见病病种诊疗指南（2025 年版）》#3', version: '2025 年版', original: false, secondaryUrl: 'https://www.gov.cn/zhengce/zhengceku/202507/content_7031426.htm', page: '页码待核', note: '官网发布页（附 PDF 附件）' },
+        { org: '中国垂体腺瘤协作组', doc: '《中国肢端肥大症诊治共识（2021 版）》', version: '2021 版', original: false, secondaryUrl: 'https://guide.medlive.cn/guideline/23838', page: '页码待核', note: '据医脉通指南页' },
+        { org: 'Acromegaly Consensus Group', doc: 'Consensus on criteria for acromegaly diagnosis and remission', version: '在线 2023-11-03', original: false, secondaryUrl: 'https://doi.org/10.1007/s11102-023-01360-1', page: '页码待核', note: 'DOI 题录；全文需订阅' }
       ]
     },
     {
@@ -95,8 +95,8 @@ window.DISEASE_PRIMER = {
         '以上是文献与指南里列出的手段，按病期与线序排列，不代表任何一项适合你。选哪一个，这一句需要问你的医生。'
       ],
       sources: [
-        { org: '中国垂体腺瘤协作组', doc: '《中国肢端肥大症诊治共识（2021 版）》', version: '2021 版', original: false, page: '页码待核' },
-        { org: '国家卫健委', doc: '《86 个罕见病病种诊疗指南（2025 年版）》#3 肢端肥大症', version: '2025 年版', original: false, page: '页码待核' }
+        { org: '中国垂体腺瘤协作组', doc: '《中国肢端肥大症诊治共识（2021 版）》', version: '2021 版', original: false, secondaryUrl: 'https://guide.medlive.cn/guideline/23838', page: '页码待核', note: '据医脉通指南页' },
+        { org: '国家卫健委', doc: '《86 个罕见病病种诊疗指南（2025 年版）》#3 肢端肥大症', version: '2025 年版', original: false, secondaryUrl: 'https://www.gov.cn/zhengce/zhengceku/202507/content_7031426.htm', page: '页码待核', note: '官网发布页（附 PDF 附件）' }
       ]
     },
     {
@@ -111,8 +111,8 @@ window.DISEASE_PRIMER = {
         '截至 2026-10-25：本台尚未对中国药物临床试验登记与信息公示平台做肢端肥大症专项检索，登记数量与阶段分布未整理。'
       ],
       sources: [
-        { org: '中国垂体腺瘤协作组', doc: '《中国肢端肥大症诊治共识（2021 版）》', version: '2021 版', original: false, page: '页码待核' },
-        { org: '国家卫健委', doc: '《86 个罕见病病种诊疗指南（2025 年版）》#3', version: '2025 年版（2025-07-10 印发）', original: false, page: '页码待核' }
+        { org: '中国垂体腺瘤协作组', doc: '《中国肢端肥大症诊治共识（2021 版）》', version: '2021 版', original: false, secondaryUrl: 'https://guide.medlive.cn/guideline/23838', page: '页码待核', note: '据医脉通指南页' },
+        { org: '国家卫健委', doc: '《86 个罕见病病种诊疗指南（2025 年版）》#3', version: '2025 年版（2025-07-10 印发）', original: false, secondaryUrl: 'https://www.gov.cn/zhengce/zhengceku/202507/content_7031426.htm', page: '页码待核', note: '官网发布页（附 PDF 附件）' }
       ]
     }
   ]
