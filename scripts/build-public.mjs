@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /**
- * 生成 public/（开发版前端，四件套）：从 prototypes/v0.2 产出。
+ * 生成 public/（开发版前端，四件套 + 36 号 primer 三件套）：从 prototypes/v0.2 产出。
  *
  * 对齐纪律：public 页面与原型逐字符对齐——style.css 与 demo-data.js 原样复制；
  * index.html 只改两处版本字符串（title / 顶部说明条）；app.js 只改"数据从哪来"
  * （先向 /api/acromegaly/bootstrap 要真数据，拿不到才回退 window.DEMO_DATA），
  * 不改任何视图函数。原型与开发版必须是同一份渲染代码（parity 要求）。
+ * primer.js / primer.css / primer-data.js 由 public/index.html 直接相对引用，必须原样随 public 发出。
  *
  * 用法：
  *   node scripts/build-public.mjs           写入
@@ -93,6 +94,10 @@ const outputs = {
   'demo-data.js': read('demo-data.js'),
   'index.html': patchIndex(read('index.html'), version),
   'app.js': patchApp(read('app.js')),
+  /* 36 号疾病概要：index.html 以相对路径引用这三个文件，缺一个顶栏「?」就打不开浮窗 */
+  'primer.css': read('primer.css'),
+  'primer-data.js': read('primer-data.js'),
+  'primer.js': read('primer.js'),
 }
 
 if (checkOnly) {
@@ -103,10 +108,10 @@ if (checkOnly) {
     else if (readFileSync(file, 'utf8') !== content) problems.push(`public/${name} 与原型（含开发版数据层补丁）不同步`)
   }
   if (problems.length) fail(problems)
-  console.log('✓ public/ 四件套与原型同步（style/demo-data 逐字符；index/app 仅版本与数据层补丁）')
+  console.log('✓ public/ 四件套 + primer 三件套与原型同步（style/demo-data/primer 逐字符；index/app 仅版本与数据层补丁）')
   process.exit(0)
 }
 
 mkdirSync(OUT, { recursive: true })
 for (const [name, content] of Object.entries(outputs)) writeFileSync(join(OUT, name), content, 'utf8')
-console.log(`✓ 已生成 public/ 四件套（v${version}）：style.css / demo-data.js / index.html / app.js`)
+console.log(`✓ 已生成 public/（v${version}）：四件套 style.css / demo-data.js / index.html / app.js + primer.css / primer-data.js / primer.js`)
