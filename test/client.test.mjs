@@ -107,9 +107,17 @@ test('④ Panel 自绘 header + 业务 iframe + 会话 aside + splitter（不是
   const spec = loadClient();
   const mod = spec.factory(() => React);
   let Panel = null;
+  let owned = null;
   mod.apply({
     effect(fn) { return fn(); },
-    desktopWorkbenches: { register(meta, P) { Panel = P; } },
+    desktopWorkbenches: {
+      register(meta, P) { Panel = P; },
+      /* 契约：hasConversation = ownsSession(currentSession())，不再看 conversation prop */
+      currentSession() { return owned; },
+      ownsSession() { return Boolean(owned); },
+      subscribe() { return () => {}; },
+      newSession() { return Promise.resolve(null); },
+    },
   });
 
   /* 无会话态：也能渲染，且首个子元素必须是 <header>（宿主为 macOS 窗口按钮留了避让变量） */
@@ -137,6 +145,7 @@ test('④ Panel 自绘 header + 业务 iframe + 会话 aside + splitter（不是
   assert.match(JSON.stringify(aside.children), /AI 对话还没开始/);
 
   /* 有会话时：aside 显示，并出现可拖 splitter（role=separator + aria-valuenow） */
+  owned = 'session-under-test'
   const live = Panel({ conversation: { tag: 'div', props: {}, children: ['native'] } });
   const liveBody = live.children[1];
   const liveAside = liveBody.children.find((c) => c && c.tag === 'aside');

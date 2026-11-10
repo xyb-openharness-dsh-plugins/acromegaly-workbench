@@ -1,6 +1,6 @@
 {
   "name": "@xyb-community/acromegaly-workbench",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "面向肢端肥大症患者与照护者的本机病程资料工作台：GH/IGF-1 生化时间线、垂体手术后激素替代双主体档案、生长抑素类似物等药物注射周期、合并症（糖代谢/心血管/睡眠呼吸暂停/关节）分节轨道",
   "private": true,
   "type": "module",
@@ -23,7 +23,7 @@
     "NOTICE.md"
   ],
   "scripts": {
-    "check": "node scripts/build-version.mjs && node --disable-warning=ExperimentalWarning demo/build-demo-data.mjs && node demo/build-demo-data.mjs --check && node scripts/build-client.mjs --check && node scripts/build-public.mjs --check && node --check dsh/index.js && node --check lib/client.js && node --check public/app.js && node scripts/check-wording.mjs && node scripts/check-workbench-package.mjs . && node scripts/check-host-contract.mjs && node --disable-warning=ExperimentalWarning --test test/*.test.mjs && node scripts/check-agent-draft-bridge.mjs . && node scripts/check-primer-links.mjs",
+    "check": "node scripts/build-version.mjs && node --disable-warning=ExperimentalWarning demo/build-demo-data.mjs && node demo/build-demo-data.mjs --check && node scripts/build-client.mjs --check && node scripts/build-public.mjs --check && node --check dsh/index.js && node --check lib/client.js && node --check public/app.js && node scripts/check-wording.mjs && node scripts/check-workbench-package.mjs . && node scripts/check-host-contract.mjs && node --disable-warning=ExperimentalWarning --test test/*.test.mjs && node scripts/check-agent-draft-bridge.mjs . && node scripts/check-primer-links.mjs && node scripts/check-agent-pane-contract.mjs .",
     "check:host": "node scripts/check-host-contract.mjs",
     "test": "node --disable-warning=ExperimentalWarning --test test/*.test.mjs",
     "audit": "node scripts/check-conformance.mjs .",
